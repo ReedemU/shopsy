@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wow Shopsy</title>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+      *{
+          margin: 0px;
+          padding: 0px;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          font-weight: bold;
+      }
+      
+      .mainupper{
+            width: 100%;
+            height: 100%;
+            background-color: yellow;
+            position: absolute;
+        }
+        .logo{
+            width: 65%;
+            height: 12vh;
+            background-color: blueviolet;
+            color: #CCCC00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 10%;
+            left: 14%;
+        }
+
+        .lower{
+            width: 100%;
+            height: 50%;
+            background-color: blueviolet;
+            position: absolute;
+            border-radius: 3vh;
+            top: 60%;
+            display: flex;
+            justify-content: center;
+        }
+        #weltxt{
+            color: #CCCC00;
+            position: absolute;
+            top: 20%;
+        }
+        #smalltxt{
+            color: #CCCC00;
+            position: absolute;
+            top: 35%;
+        }
+        #signinbtn{
+            width: 25%;
+            height: 6vh;
+            background-color: black;
+            color: white;
+            position: absolute;
+            border: 1px solid;
+            outline: none;
+            top: 70%;
+            left: 20%;
+            border-radius: 1vh;
+        }
+
+        #signupbtn{
+            width: 25%;
+            height: 6vh;
+            background-color: white;
+            color: black;
+            position: absolute;
+            border: 1px solid;
+            outline: none;
+            top: 70%;
+            left: 60%;
+            border-radius: 1vh;
+        }
+
+        .mainupper2{
+            width: 100%;
+            height: 100%;
+            background-color: yellow;
+            position: fixed;
+            z-index: 1;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+        .logo2{
+            width: 65%;
+            height: 12vh;
+            background-color: blueviolet;
+            color: #CCCC00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 10%;
+            left: 14%;
+        }
+
+        .lower2{
+            width: 100%;
+            height: 50%;
+            background-color: blueviolet;
+            position: absolute;
+            border-radius: 3vh;
+            top: 60%;
+            display: flex;
+            justify-content: center;
+        }
+       #userinput{
+           width: 70%;
+           height: 7vh;
+           background-color: grey;
+           border: 1px solid black;
+           outline: none;
+           position: absolute;
+           top: 20%;
+           color: white;
+           border-radius: 2vh;
+       }
+       #userinput::placeholder{
+    color: white;
+}
+       #passinput{
+           width: 70%;
+           height: 7vh;
+           background-color: grey;
+           border: 1px solid black;
+           outline: none;
+           position: absolute;
+           top: 40%;
+           color: white;
+           border-radius: 2vh;
+       }
+#passinput::placeholder{
+    color: white;
+}
+       #loginbtn{
+        width: 70%;
+           height: 7vh;
+           background-color: #e54;
+           border: 1px solid black;
+           outline: none;
+           position: absolute;
+           top: 60%;
+           color: white;
+           border-radius: 2vh;
+       }
+       #lol{
+           display: none;
+       }
+       .home{
+           width: 100%;
+           height: 100%;
+           position: fixed;
+           background-color: whitesmoke;
+           top: 0px;
+           left: 0px;
+           overflow: scroll;
+           display: none;
+       }
+
+       #nav{
+           position: absolute;
+           top: 5%;
+           left: 5%;
+           font-size: 2.5vh;
+
+       }
+       #search{
+           position: absolute;
+           width: 60%;
+           height: 5vh;
+           border-radius: 1vh;
+           border: 1px solid #CCCC00;
+           top: 5vh;
+           left: 20%;
+           outline: none;
+       }
+       #search::placeholder{
+           font-size: 1vh;
+           color: black;
+           position: absolute;
+           left: 10%;
+           top: 2vh;
+       }
+       #trendtxt{
+           position: absolute;
+           color: #CCCC00;
+           top: 20%;
+           left: 30%;
+       }
+
+       .homecard{
+           width: 70%;
+           height: 30vh;
+           border: 0px solid black;
+           left: 10%;
+           position: absolute;
+           top: 35%;
+           background-color: white;
+       }
+
+       .imgcan{
+           width: 50%;
+           height: 100%;
+           position: absolute;
+           left: 0%;
+       }
+
+       #cardimg{
+           width: 50%;
+           height: 30%;
+           position: absolute;
+           object-fit: cover;
+           top: 36%;
+           left: 10%;
+           
+       }
+       #upto{
+           position: absolute;
+           left: 70%;
+           top: 20%;
+           color: black;
+           z-index: 100;
+       }
+
+       .newstyle{
+           width: 70%;
+           height: 40vh;
+           background-color:white;
+          position: absolute;
+          top: 70%;
+          left: 10%;
+         
+       }
+       #nsimg{
+           width: 30%;
+           height: 90%;
+           position: absolute;
+           left: 70%;
+           background-size: cover;
+           background-repeat: no-repeat;
+  background-position: 10% 10%;
+           margin: auto;
+       }
+
+       #nstxt{
+           position: absolute;
+           left: 10%;
+           top: 5%;
+       }
+
+       .sh1{
+           width: 20%;
+           height: 30vh;
+           background-color: cyan;
+           position: absolute;
+           top: 80%;
+           left: 5%;
+           display: flex;
+           justify-content: center;
+       }
+       .sh1>h4{
+           position: absolute;
+           top: 120%;
+           
+       }
+       .sh1>h5{
+        position: absolute;
+           top: 130%;
+       }
+       .sh1>button{
+           width:14vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 85%;
+       }
+       .sh2{
+           width: 20%;
+           height: 30vh;
+           background-color: cyan;
+           position: absolute;
+           top: 80%;
+           left: 40%;
+           display: flex;
+           justify-content: center;
+       }
+       .sh2>h4{
+           position: absolute;
+           top: 120%;
+           
+       }
+       .sh2>h5{
+        position: absolute;
+           top: 130%;
+       }
+       .sh2>button{
+           width:14vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 85%;
+       }
+
+       .sh3{
+           width: 20%;
+           height: 30vh;
+           background-color: cyan;
+           position: absolute;
+           top: 80%;
+           left: 70%;
+           display: flex;
+           justify-content: center;
+       }
+       .sh3>h4{
+           position: absolute;
+           top: 120%;
+           
+       }
+       .sh3>h5{
+        position: absolute;
+           top: 130%;
+       }
+       .sh3>button{
+           width:14vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 85%;
+       }
+
+       .sh4{
+           width: 20%;
+           height: 30vh;
+           background-color: cyan;
+           position: absolute;
+           top: 130%;
+           left: 5%;
+           display: flex;
+           justify-content: center;
+       }
+       .sh4>h4{
+           position: absolute;
+           top: 120%;
+           
+       }
+       .sh4>h5{
+        position: absolute;
+           top: 130%;
+       }
+       .sh4>button{
+           width:14vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 85%;
+       }
+
+       .sh5{
+           width: 20%;
+           height: 30vh;
+           background-color: cyan;
+           position: absolute;
+           top: 130%;
+           left: 40%;
+           display: flex;
+           justify-content: center;
+       }
+       .sh5>h4{
+           position: absolute;
+           top: 120%;
+           
+       }
+       .sh5>h5{
+        position: absolute;
+           top: 130%;
+       }
+       .sh5>button{
+           width:14vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 85%;
+       }
+       .sh6{
+           width: 20%;
+           height: 30vh;
+           background-color: cyan;
+           position: absolute;
+           top: 130%;
+           left: 70%;
+           display: flex;
+           justify-content: center;
+       }
+       .sh6>h4{
+           position: absolute;
+           top: 120%;
+           
+       }
+       .sh6>h5{
+        position: absolute;
+           top: 130%;
+       }
+       .sh6>button{
+           width:14vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 85%;
+       }
+       .sh7{
+           width: 20%;
+           height: 30vh;
+           background-color: cyan;
+           position: absolute;
+           top: 180%;
+           left: 5%;
+           display: flex;
+           justify-content: center;
+       }
+       .sh7>h4{
+           position: absolute;
+           top: 120%;
+           
+       }
+       .sh7>h5{
+        position: absolute;
+           top: 130%;
+       }
+       .sh7>button{
+           width:14vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 85%;
+       }
+       .sh8{
+           width: 20%;
+           height: 30vh;
+           background-color: cyan;
+           position: absolute;
+           top: 180%;
+           left: 40%;
+           display: flex;
+           justify-content: center;
+       }
+       .sh8>h4{
+           position: absolute;
+           top: 120%;
+           
+       }
+       .sh8>h5{
+        position: absolute;
+           top: 130%;
+       }
+       .sh8>button{
+           width:14vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 85%;
+       }
+
+       .fullsh{
+        width: 100%;
+           height: 100%;
+           position: fixed;
+           background-color: whitesmoke;
+           top: 0px;
+           left: 0px;
+           overflow: scroll;
+           display: none;
+       }
+
+       .img{
+           width: 50%;
+           height: 60vh;
+           background-color: #8fe9e9;
+           position: absolute;
+           left: 25%;
+           top: 10%;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+          
+       }
+
+       #orderbtn{
+        width:20vh;
+           height: 6vh;
+           background-color: blueviolet;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 60%;
+           left: 33.5%;
+       }
+       #imgimg{
+           width: 90%;
+           height: 55%;
+           position: absolute;
+           
+       }
+
+       .fullsh>h4{
+          position: absolute;
+          top: 80%;
+          left: 10%;
+       }
+
+       .fullsh>h5{
+          position: absolute;
+          top: 90%;
+          left: 10%;
+       }
+
+       .fullsh>h6{
+          position: absolute;
+          top: 110%;
+          left: 10%;
+       }
+
+       #size{
+           width: 40%;
+           height: 6vh;
+           outline: none;
+           border: 1px solid black;
+           position: absolute;
+           top: 140%;
+       }
+       .footer{
+           width: 90%;
+           height: 10vh;
+           background-color: #CCCC00;
+           border-radius: 2vh;
+           top: 85%;
+           left: 5%;
+           position: fixed;
+           display: flex;
+           align-items: center;
+           display: none;
+       }
+       #icon1{
+           position: absolute;
+           left: 10%;
+           color: white;
+       }
+       #icon2{
+           position: absolute;
+           left: 30%;
+           color: white;
+       }
+       #icon3{
+           position: absolute;
+           left: 50%;
+           color: white;
+       }
+       #icon4{
+           position: absolute;
+           left: 75%;
+           color: white;
+       }
+       #txt1{
+           position: absolute;
+           left: 8%;
+           top: 75%;
+           color: blueviolet;
+           font-weight: bold;
+       }
+       #txt2{
+           position: absolute;
+           left: 24%;
+           top: 75%;
+           color: blueviolet;
+           font-weight: bold;
+       }
+       #txt3{
+           position: absolute;
+           left: 47%;
+           top: 75%;
+           color: blueviolet;
+           font-weight: bold;
+       }
+       #txt4{
+           position: absolute;
+           left: 73%;
+           top: 75%;
+           color: blueviolet;
+           font-weight: bold;
+       }
+
+
+       .fullo{
+        width: 100%;
+           height: 100%;
+           position: fixed;
+           background-color: whitesmoke;
+           top: 0px;
+           left: 0px;
+           overflow: scroll;
+          display: none;
+       }
+    .fullo>h1{
+        position: absolute;
+        top: 5%;
+        left: 5%;
+
+    }
+    .fullo>h5{
+        position: absolute;
+        top: 20%;
+        left: 5%;
+
+    }
+
+    .fullo>button{
+        width:20vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 40%;
+           left: 6%;
+    }
+
+    .fullp{
+        width: 100%;
+           height: 100%;
+           position: fixed;
+           background-color: whitesmoke;
+           top: 0px;
+           left: 0px;
+           overflow: scroll;
+         display: none;
+         justify-content: center;
+
+       }
+
+       #usericon{
+           font-size: 5vh;
+           position: absolute;
+           top: 5%;
+       }
+
+       #username{
+           position: absolute;
+           top: 30%;
+       }
+
+       .fullnav{
+           width: 80%;
+           height: 70%;
+           background-color: #e6e65a;
+           position: absolute;
+           left: 7%;
+           top: 8%;
+           display: none;
+       }
+       .fullnav>h2{
+           position: absolute;
+           top: 5%;
+           color: blueviolet;
+           left: 5%;
+       }
+       .fullnav>h3{
+           position: absolute;
+           top: 50%;
+           color: blueviolet;
+           left: 5%;
+       }
+       .fullnav>h4{
+           position: absolute;
+           top: 50%;
+           color: blueviolet;
+           left: 50%;
+       }
+       .fullnav>h6{
+           position: absolute;
+           top: 15%;
+           color:white;
+           left: 5%;
+       }
+       .fullnav>h5{
+           position: absolute;
+           top: 60%;
+           color:white;
+           left: 5%;
+       }
+    </style>
+</head>
+<body>
+    <div class="mainupper">
+       <div class="logo">
+           <h3>Wow <br>Shopsy</h3>
+       </div>
+        <div class="lower">
+           <h1 id="weltxt">Welcome</h1>
+           <h5 id="smalltxt">To Our Shopping Website</h5>
+          
+           <button id="signinbtn"onclick='shlog()'>Sign In</button>
+           <button id="signupbtn"onclick='shlog()'>Sign Up</button>
+        </div>
+    </div>
+
+    <div class="mainupper2">
+        <div class="logo2">
+            <h3>Wow <br>Shopsy</h3>
+        </div>
+         <div class="lower2">
+          <input id="userinput"placeholder='Enter Your Name'>
+          <input id="passinput"placeholder='Enter Your Password'>
+          <button id="loginbtn"onclick='loginop()'>Log In Or Sign Up</button>
+
+          
+         </div>
+     </div>
+<input id="lol">
+
+<div class="home">
+    <div class="fa fa-bars"id='nav'onclick='opennav()'></div>
+
+    <input id="search"placeholder='Search for products'>
+
+
+<h1 id="trendtxt">Trending</h1>
+
+<div class="homecard">
+    
+   
+
+    <h2 id="upto">Up To <br>50% Off</h2>
+</div>
+ <img id="cardimg"src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8NDw4PDw0NDQ8NDQ8NDQ0NDQ8NDQ0NFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDQ0NDw0NDisZFRkrNy0tLSstKysrKysrNysrKysrKysrKysrKysrKysrKysrLSsrKysrLSsrKysrKysrK//AABEIAPsAyQMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAQIDBAUHBv/EADEQAQEAAQIEBAMJAAIDAAAAAAABAgMRBBIhMUFRYXEikaEFEzJCUmKBscEU8CNy4f/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAARAf/aAAwDAQACEQMRAD8A+4gAAAAAAAAAAAAAAACNzmgJAAAAAAAAAAAAGWpr44+Lm1OKt7dP7B2ZaknesM+It35dt/C3tu5VolFJxucu2Ukvya48bfL6q54TKdfn4xz56GWPb4p9Qd04yeVXnF4vJ53Bn9oa2Oe10ZMd/wAs4jVyk2njjp7b73tv029eij9L/wAvHzReMx9fk8DQ4rUy5uacsmUk/wDHnhct7+702Uz+0JNTkltk1JpZZeWp8N5dtus2zx+KdJbt36FHv5cdPCVjnxuXhtPq45ve0t9o30+Ft/FdvSdaCPvc9S7S2/SR14Y7STfezxThhMZtJtPrUgnHVs/+tcdaePRhYjYo7JlKlxtMdazv281HQIxu6QAAAAVzzmM3vg4dXibl26T6rcdqdZj/ADXPIgbL4wkWiBEiYBEkiQVyxl7yX3krHV4LTz23xs2364ameHhZ+W/uv87XvI6Nk7Aww4PTkk5ek88sre+/fc0uB0sLlcdLCXK82V23ty779fafJvEgAkBCUAAkFRICNLPlu3hezrlcGv2vp1dfD5b4xoagAAjLsDytbLfPK+u3yWxYy72+trXS8WRpEqyrQEgkBIAlKEgAAAAlCQAEAlBui3cFbF+By6beXRSnB34sp6/4uDuAUFc+yyMuwPFwWmW19/6RJ39LU5Y/Xt6VkaY5NY45qbXr7OnHIGiVZVoCQAEgCQAAASIASramsOI1eWW/Ked8AWyy329f6WjLRx7emMjeQFajhfx5fx/Sarw/TUvrJVwegAoIy7JU1rtjfYHk43rb6rbK4rxkY608fI4bU5pv473f5rajn4a/FlPag9DGrysMWmNBpulWLQEgAkAAEAkQigjPLbt8nLr5YZ3H4tssbvyW9/B0Vx6+M+9wvL1mOXX5dAdunNouppNARWc6Z4+s2aM9Xvhf3bfRR6EEYdolQZ8Rfhy9q0Vzx3lnmDycYvs1z4fLHt1inNZ3xqQY6nZycLnZqZTbvJZ/Duztv5ax/wCPcbz3x6fwDab3u0iuEaRBMWiIsAlCQAAAAQrZ5LoBTmnj0cvHZycm36ursyjk4qScvT83kDp0uzRlp54zxnzX+9w/VPnAWY6/5f8A2/yrXiMfO32lVyy5+kxy970Ud+n2iymlOkXUAAEXGeSQFeSeTm+0LMcN/Wf263F9qTfCTzygOfTrWOfS7N8WReLKxYBKAEgAlAAAUFcq58Jz6nXtI2zrPg/x1cHZeGx8icNj5NxRnNHGeC0wk8FgAAAAAABycfPw+/8AjrcnG/l9wcmMaxnLtb5NIyLYrxSLQEgAJQkEAAItSrkCmdOAnxZe5nE8J0zvrtVwegAoAAAAAAAAOXjfD3dTl43wBzTvV4zw71pGRaJVTAWERICUAAACEosBW4q6fTOeuP8Aq2W6k/Fh7X/FwekIiVAAAAAAAABzcX4Olz8X2nuDjx7tGc7rxkWiUALSpUTuCwjc3BIboBIhIK5Msfx4e1/trkzn48Pa/wBqPRiURKgAAAAAAAA5+L7T3dDk43LtAYbJVxq7IAAJVSCd0qgLJlVibAWQiVIIrPPplhf4aVlrX6Wf2o9LG9EqaN6RdQAAAAAAAAefxuXxyeUeg8riMt9TL02n0TRMWjNaIL7pV3SCUU3AE7ISAtjURFgL3FEVxyXArDX7Vqz1ewO3hbvjGzl4C/DHU0AAAAAAAAIrxube5Xzyt+r1OLz5dPOzwxys/iPH0e09k0bxZSVO6C260qiYC26VYkEpQbgndMqsoC1hESpA3U1F2epQa/Z+XeerveXwWW2T1GgAAAAAAABTVx5pZfGbV5F0rhdvl6vaZ6mjMu8B5cS6s+D8rWV4XLz+iQZLRN0c54So5cv00gnZKnX9OX0Rv+3L5A1RspzemXyOb0vyBa4nVHN+2/I5v20FuqZf+7q837Mvonmv6L9AW3Z5rb5fo+pNDPLv0noQV4LHfLd6rHQ0JhGygAAAAAAAAAAABsjliQFeSeRyTyWAU+7nkfdzyXAV5J5HJPJYBXknknlnkkBG0SAAAAAAAP/Z'>
+
+
+<div class="sh1">
+    <h4>Product</h4>
+    <h5>Price:</h5>
+    <button onclick="k()">Buy Now</button>
+</div>
+<div class="sh2">
+    <h4>Product</h4>
+    <h5>Price:</h5>
+    <button onclick="k()">Buy Now</button>
+</div>
+<div class="sh3">
+    <h4>Product</h4>
+    <h5>Price:</h5>
+    <button onclick="k()">Buy Now</button>
+</div>
+<div class="sh4">
+    <h4>Product</h4>
+    <h5>Price:</h5>
+    <button onclick="k()">Buy Now</button>
+</div>
+<div class="sh5">
+    <h4>Product</h4>
+    <h5>Price:</h5>
+    <button onclick="k()">Buy Now</button>
+</div>
+<div class="sh6">
+    <h4>Product</h4>
+    <h5>Price:</h5>
+    <button onclick="k()">Buy Now</button>
+</div>
+<div class="sh7">
+    <h4>Product</h4>
+    <h5>Price:</h5>
+    <button onclick="k()">Buy Now</button>
+</div>
+<div class="sh8">
+    <h4>Product</h4>
+    <h5>Price:</h5>
+    <button onclick="k()">Buy Now</button>
+</div>
+</div>
+
+<div class="fullsh">
+    <div class="img">
+        <img id="imgimg"src='data:image/jpeg;base64,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'>
+  
+  
+    </div>
+    <button id="orderbtn"onclick='order()'>Order Now</button>
+    <h4>Price:</h4>
+    <h5>Product</h5>
+
+    <h6>This is very awesome dress buy it now and you can enjoy by our 50% off on this<br><br><br> product buy now.the product is with best quality cloth<br><br><br>this product is very cool and trending product</h6>
+<input id="size"placeholder='select size'>
+   
+</div>
+<div class="footer">
+<div class="fa fa-home"id='icon1'></div>
+<div class="fa fa-calendar-o"id='icon2'></div>
+<div class="fa fa-percent"id='icon3'></div>
+<div class="fa fa-user-o"id='icon4'></div>
+<h6 id="txt1">Home</h6>
+<h6 id="txt2"onclick='alert("You Will Get Both Ladies And Gents")'>Categories</h6>
+<h6  id="txt3"onclick='kks()'>offers</h6>
+<h6 id="txt4"onclick='kks2()'>Profile</h6>
+
+</div>
+
+<div class="fullo">
+    <h1>Get Upto<br>50% OFF</h1>
+    <h5>You Will get amazing products at shopsy<br>In Best Offers</h5>
+    <button onclick="k2()">Start Shopping</button>
+</div>
+
+<div class="fullp">
+   <div class="fa fa-user-o"id='usericon'>
+
+   </div>
+   <h1 id="username"></h1>
+</div>
+
+<div class="fullnav"onclick='closi()'>
+    <h2>Mens</h2>
+    <h6>Plain T-SHIRT<br><br>Full Sleeve T-SHIRT<br><br>Printed Full T-SHIRT<br><br>Printed Half T-SHIRT<br><br>Half Sleeve T-SHIRT<br><br>Couples T-SHIRT</h6>
+    <h3>Womens</h3>
+    <h5>Printed T-SHIRT<br><br>Full Sleeve T-SHIRT<br><br>Printed Half T-SHIRT<br><br>Fashion Top's</h5>
+
+
+    <h4>COD Only</h4>
+</div>
+     <script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAP6AHHrlgj1bzorICWKjcakV9G-Jbyf6U",
+  authDomain: "shooping-95ca3.firebaseapp.com",
+  projectId: "shooping-95ca3",
+  storageBucket: "shooping-95ca3.appspot.com",
+  messagingSenderId: "1016999225548",
+  appId: "1:1016999225548:web:ebee4c83d70162c5423a69",
+  measurementId: "G-R99408P1ST"
+};
+firebase.initializeApp(firebaseConfig);
+     window.onload=function(){
+         var shopsy=localStorage.getItem('shopl')
+
+         lol.value=shopsy
+         
+         if(lol.value=='lol'){
+            document.querySelector('.mainupper2').style.display='none'
+             document.querySelector('.mainupper').style.display='none'
+             document.querySelector('.home').style.display='flex'
+             document.querySelector('.footer').style.display='flex'
+
+             var lc2=localStorage.getItem('lc')
+username.innerHTML=lc2
+         
+username.value=lc2
+username.style.display='flex'
+         }
+       
+     }
+
+function shlog(){
+             document.querySelector('.mainupper2').style.display='flex'
+             document.querySelector('.mainupper').style.display='none'
+         }
+
+         function loginop(){
+             var name=userinput.value
+             var pass=passinput.value
+
+              var shopl=lol.value='lol'
+              var lc=username.value=name
+            
+              localStorage.setItem('lc',lc)
+              localStorage.setItem('shopl',shopl)
+
+              firebase.database().ref('allusers').push().set({
+                  'name':name,
+                  'pass':pass
+              })
+
+              document.querySelector('.mainupper2').style.display='none'
+              document.querySelector('.home').style.display='flex'
+             document.querySelector('.footer').style.display='flex'
+         }
+
+         function order(){
+             var uname=prompt('Enter Your Name')
+             var mobile=prompt('Enter Your Mobile Number')
+             var size=prompt('Enter Your Size')
+             alert('Thanks Your Order Placed')
+             document.querySelector('.fullsh').style.display='none'
+             firebase.database().ref('allorders').push().set({
+                  'uname':uname,
+                  'mobile':mobile,
+                  'size':size
+              })
+             
+              
+         }
+
+         function k(){
+            document.querySelector('.fullsh').style.display='flex'
+         }
+         function k2(){
+            document.querySelector('.fullo').style.display='none'
+         }
+
+         function kks2(){
+            document.querySelector('.fullp').style.display='flex'
+         }
+
+         function opennav(){
+             document.querySelector('.fullnav').style.display='flex'
+         }
+
+         function closi(){
+            document.querySelector('.fullnav').style.display='none'
+         }
+         </script>
+</body>
+</html>
