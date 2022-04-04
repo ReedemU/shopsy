@@ -192,7 +192,7 @@
        }
        #trendtxt{
            position: absolute;
-           color: #CCCC00;
+           color: mediumaquamarine;
            top: 15%;
            left: 30%;
        }
@@ -215,10 +215,10 @@
        }
 
        #cardimg{
-           width: 50%;
-           height: 30%;
+           width: 30vh;
+           height: 30vh;
            position: absolute;
-           object-fit: cover;
+           
            top: 36%;
            left: 10%;
            
@@ -721,6 +721,148 @@
            color:white;
            left: 5%;
        }
+
+       #addicon{
+           font-size: 2vh;
+           position: fixed;
+           left: 80%;
+           top: 20%;
+       }
+
+       #kksbtn{
+        width:20vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 25vh;
+           left: 20vh;
+       }
+       .fulladd{
+           width: 100%;
+           height: 100%;
+           background-color: white;
+           position: fixed;
+           top: 0px;
+           left: 0px;
+           display: none;
+           justify-content: center;
+       }
+
+       #productname{
+           width: 70%;
+           height: 6vh;
+           position: absolute;
+           top: 20%;
+           outline: none;
+           border: 1px solid black;
+       }
+       #productprice{
+           width: 70%;
+           height: 6vh;
+           position: absolute;
+           top: 30%;
+           outline: none;
+           border: 1px solid black;
+       }
+       #submitproduct{
+           width: 70%;
+           height: 6vh;
+           position: absolute;
+           top: 50%;
+           background-color: blueviolet;
+           color: white;
+           outline: none;
+           border: 1px solid black;
+       }
+       #productimage{
+           width: 70%;
+           height: 6vh;
+           position: absolute;
+           top: 40%;
+          
+       }
+
+       #imgproduct{
+        width: 70%;
+           height: 50vh;
+           position: absolute;
+           top: 60%;
+       }
+        #allkks{
+            display: none;
+            width: 100%;
+           height: 100%;
+           background-color: white;
+           position: fixed;
+           top: 0px;
+           left: 0px;
+        
+        }
+       .pn{
+           width: 55%;
+           height: 30vh;
+           position: relative;
+           top: 10vh;
+           margin-top: 5vh;
+           border: 1px solid;
+           background-color: whitesmoke;
+           border-radius: 1vh;
+           padding-top: 20vh;
+           display: flex;
+           justify-content: center;
+           
+       }
+
+       .pi{
+           width: 15vh;
+           height: 15vh;
+           border-radius: 15vh;
+           position: absolute;
+           top: 5%;
+       }
+       .oporder{
+        width:20vh;
+           height: 6vh;
+           background-color: black;
+           border: 1px solid white;
+           color: white;
+           outline: none;
+           position: absolute;
+           top: 70%;
+           
+       }
+
+       .pp{
+           position: absolute;
+           top:52%;
+           color: blueviolet;
+       }
+       #segr2{
+            width: 70%;
+            height: 7vh;
+            position: fixed;
+            outline: none;
+            background: white;
+            border: 0.5px solid black;
+            font-weight: bold;
+            top: 2vh;
+            border-radius: 5px;
+            left: 10%;
+            backdrop-filter: blur(5px);
+            font-weight: bold;
+            color: black;
+        }
+
+        #segr2::placeholder{
+        	font-size: 1.5vh;
+        	font-weight: bold;
+        	color: black;
+        	position: relative;
+        	left: 5vh;
+        }
     </style>
 </head>
 <body>
@@ -750,14 +892,19 @@
          </div>
      </div>
 <input id="lol">
-
 <div class="home">
+
     <div class="fa fa-bars"id='nav'onclick='opennav()'></div>
 
     <input id="search"placeholder='Search for products'>
 
+<div class="fa fa-plus"id='addicon'onclick='adf()'></div>
+
+
 
 <h1 id="trendtxt">Trending</h1>
+
+<button id="kksbtn"onclick='shul()'>Start Shopping</button>
 
 <div class="homecard">
     
@@ -826,13 +973,11 @@
 </div>
 <div class="footer">
 <div class="fa fa-home"id='icon1'></div>
-<div class="fa fa-calendar-o"id='icon2'></div>
-<div class="fa fa-percent"id='icon3'></div>
-<div class="fa fa-user-o"id='icon4'></div>
-<h6 id="txt1">Home</h6>
-<h6 id="txt2"onclick='alert("You Will Get Both Ladies And Gents")'>Categories</h6>
-<h6  id="txt3"onclick='kks()'>offers</h6>
-<h6 id="txt4"onclick='kks2()'>Profile</h6>
+<div class="fa fa-calendar-o"id='icon2'onclick='alert("You Will Get Both Ladies And Gents")'></div>
+<div class="fa fa-percent"id='icon3'onclick='kks()'></div>
+<div class="fa fa-user-o"id='icon4'onclick='kks2()'></div>
+
+
 
 </div>
 
@@ -858,6 +1003,16 @@
 
     <h4>COD Only</h4>
 </div>
+<div class="fulladd">
+    <input id="productname"placeholder='Enter Product Name'>
+    <input id="productprice"placeholder='Enter Product Price'>
+    <input type="file"id='productimage'>
+    <img id="imgproduct">
+    <button id="submitproduct"onclick='opb()'>Add</button>
+</div>
+<ul id="allkks">
+    <input id="segr2"placeholder='Search Products'type='text'onkeyup="searchFun()" >
+</ul>
      <script>
 
 const firebaseConfig = {
@@ -870,6 +1025,12 @@ const firebaseConfig = {
   measurementId: "G-R99408P1ST"
 };
 firebase.initializeApp(firebaseConfig);
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  
+}else{
+    kksbtn.style.left='90vh'
+    trendtxt.style.left='44%'
+}
      window.onload=function(){
          var shopsy=localStorage.getItem('shopl')
 
@@ -948,6 +1109,119 @@ function shlog(){
          function closi(){
             document.querySelector('.fullnav').style.display='none'
          }
+
+         document.getElementById('productimage').onchange = function (evt) {
+    var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+    
+
+
+
+    // FileReader support
+    if (FileReader && files && files.length) {
+        var fr = new FileReader();
+        fr.onload = function () {
+            document.getElementById('imgproduct').src = fr.result;
+        
+        }
+        fr.readAsDataURL(files[0]);
+      }
+ 
+        // fallback -- perhaps submit the input to an iframe and temporarily store
+        // them on the server until the user's session ends.
+    
+}
+
+function opb(){
+    var productnami=productname.value
+    var productprici=productprice.value
+    var productimagi=imgproduct.src
+    firebase.database().ref('allshop').push().set({
+                  'productname':productnami,
+                  'productprice':productprici,
+                  'productimage':productimagi
+              })
+             allkks.style.display='block'     
+             document.querySelector('.fulladd').style.display='none'
+             alert('added')
+}
+
+
+firebase.database().ref("allshop").on("child_added", function(snapshot) {
+
+
+var html = `
+         <center> <li  id=${snapshot.key} class='pn'>${snapshot.val().productname}
+            
+            <img class='pi'src=${snapshot.val().productimage}>
+            <h2  id=${snapshot.key} class='pp'> ${snapshot.val().productprice}</h2>
+            <button  id=${snapshot.key} class='oporder'onclick='opppp(this)'>Order Now</button>
+            </li></center>
+      `
+
+var places = document.getElementById("allkks")
+places.innerHTML = html + places.innerHTML;
+
+
+});
+
+function opppp(self){
+    var pns=self.parentElement.querySelector('.pn')
+    var ppns=self.parentElement.querySelector('.pi')
+
+   var pad=prompt('Enter Your Address')
+   var psize=prompt('Enter Your Size')
+   var pms=prompt('Enter Your Mobile Number')
+   var pnas=prompt('Enter Your Name')
+
+   alert('Order Placed')
+   firebase.database().ref('allor').push().set({
+                  'address':pad,
+                  'whatisproduct':pns,
+                  'whatisprice':ppns,
+                  'whatissize':psize,
+                  'whatismobile':pms,
+                  'whatisname':pnas
+              })
+
+}
+
+const searchFun=()=>{
+    let filter=document.getElementById('segr2').value.toUpperCase();
+    let ul=document.getElementById('allkks')
+    let li=ul.getElementsByTagName('li')
+
+    for(var i=0; i<li.length; i++){
+        let a=li[i]
+        let textValue=a.textContent||a.innerHTML;
+        if(textValue.toUpperCase().indexOf(filter)>-1){
+            li[i].style.display='flex';
+            
+
+        }else{
+            li[i].style.display='none'
+           
+        }
+    }
+    }
+
+    function shul(){
+         allkks.style.display='block'
+    }
+
+    function adf(){
+      var vip=prompt('Please Enter Passcode For This')
+      var passop='kksop123'
+      if(vip==passop){
+        document.querySelector('.fulladd').style.display='flex'
+      }else{
+          alert('wrong passcode')
+      }
+    }
+
+    function kks(){
+        document.querySelector('.fullo').style.display='flex'
+    }
          </script>
 </body>
 </html>
